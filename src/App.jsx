@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import brasCubasImg from './assets/bras_cubas.jpeg'
@@ -6,6 +7,8 @@ import SeletorCapitulos from './SeletorCapitulos'
 import BotoesControle from './BotoesControle'
 
 function App() {
+  // let taTocando = false;
+  const [taTocando, definirTaTocando] = useState(false)
   const informacoesLivro = {
     nome: 'Memórias Póstumas de Brás Cubas',
     autor: 'Machado de Assis',
@@ -14,6 +17,8 @@ function App() {
     textoAlternativo: 'Capa do livro Memórias Póstumas de Brás Cubas',
   }
 
+  
+
   return (
     <>
       <Capa
@@ -21,7 +26,7 @@ function App() {
         textoAlternativo={informacoesLivro.textoAlternativo}
       />
       <SeletorCapitulos capituloAtual={1} />
-      <BotoesControle />
+      <BotoesControle taTocando={taTocando} definirTaTocando={definirTaTocando}/>
     </>
   )
 }
