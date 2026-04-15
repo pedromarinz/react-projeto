@@ -1,6 +1,6 @@
 :root {
-  font-family: sans-serif, audible-font, Inter, system-ui, Avenir, Helvetica,
-    Arial;
+  font-family:
+    sans-serif, audible-font, Inter, system-ui, Avenir, Helvetica, Arial;
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
@@ -140,10 +140,11 @@
 
 .caixa-botoes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
   align-items: center;
-  width: 60%;
-  max-width: 400px;
+  width: 100%;
+  padding-top: 2rem;
   & > button {
     background-color: transparent;
     color: white;
