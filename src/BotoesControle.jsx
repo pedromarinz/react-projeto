@@ -1,7 +1,7 @@
 const BotoesControle = (props) => {
   return (
     <div className="caixa-botoes">
-      <button>
+      <button onClick={props.retrocederFaixa}>
         <i className="bi bi-skip-start"></i>
       </button>
       <button>
@@ -15,7 +15,7 @@ const BotoesControle = (props) => {
       <button>
         <i className="bi bi-arrow-clockwise"></i>
       </button>
-      <button>
+      <button onClick={props.avancarFaixa}>
         <i className="bi bi-skip-end"></i>
       </button>
     </div>
