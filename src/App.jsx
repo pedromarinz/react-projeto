@@ -1,84 +1,85 @@
-import { useState, useRef, useEffect } from 'react'
-import './App.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import brasCubasImg from './assets/bras_cubas.jpeg'
-import Capa from './Capa'
-import SeletorCapitulos from './SeletorCapitulos'
-import BotoesControle from './BotoesControle'
-import livro from './assets/capitulos/livro'
-import GerenciadorFaixa from './GerenciadorFaixa'
-import ContainerProgresso from './ContainerProgresso'
+import { useState, useRef, useEffect } from "react";
+import "./App.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import brasCubasImg from "./assets/bras_cubas.jpeg";
+import Capa from "./Capa";
+import SeletorCapitulos from "./SeletorCapitulos";
+import BotoesControle from "./BotoesControle";
+import livro from "./assets/capitulos/livro";
+import GerenciadorFaixa from "./GerenciadorFaixa";
+import ContainerProgresso from "./ContainerProgresso";
 
 function App() {
   // let taTocando = false;
-  const [taTocando, definirTaTocando] = useState(false)
-  const [faixaAtual, definirFaixaAtual] = useState(0)
-  const [tempoTotalFaixa, definirTempoTotalFaixa] = useState(0)
-  const [tempoAtualFaixa, definirTempoAtualFaixa] = useState(0)
-  const tagAudio = useRef(null)
-  const barraProgresso = useRef(null)
+  const [taTocando, definirTaTocando] = useState(false);
+  const [faixaAtual, definirFaixaAtual] = useState(0);
+  const [tempoTotalFaixa, definirTempoTotalFaixa] = useState(0);
+  const [tempoAtualFaixa, definirTempoAtualFaixa] = useState(0);
+  const tagAudio = useRef(null);
+  const barraProgresso = useRef(null);
 
   useEffect(() => {
     if (taTocando) {
-      tocarFaixa()
+      tocarFaixa();
     }
-  }, [faixaAtual])
+  }, [faixaAtual]);
 
   const informacoesLivro = {
-    nome: 'Memórias Póstumas de Brás Cubas',
-    autor: 'Machado de Assis',
+    nome: "Memórias Póstumas de Brás Cubas",
+    autor: "Machado de Assis",
     totalCapitulos: 2,
     capa: brasCubasImg,
     capitulos: livro,
-    textoAlternativo: 'Capa do livro Memórias Póstumas de Brás Cubas',
-  }
+    textoAlternativo: "Capa do livro Memórias Póstumas de Brás Cubas.",
+  };
 
   function tocarFaixa() {
-    tagAudio.current.play()
-    definirTaTocando(true)
+    tagAudio.current.play();
+    definirTaTocando(true);
   }
 
   const pausarFaixa = () => {
-    tagAudio.current.pause()
-    definirTaTocando(false)
-  }
+    tagAudio.current.pause();
+    definirTaTocando(false);
+  };
 
   const tocarOuPausarFaixa = () => {
     if (taTocando) {
-      pausarFaixa()
+      pausarFaixa();
     } else {
-      tocarFaixa()
+      tocarFaixa();
     }
-  }
+  };
 
   const avancarFaixa = () => {
     if (informacoesLivro.totalCapitulos === faixaAtual + 1) {
-      definirFaixaAtual(0)
+      definirFaixaAtual(0);
     } else {
-      definirFaixaAtual(faixaAtual + 1)
+      definirFaixaAtual(faixaAtual + 1);
     }
-  }
+  };
 
   const retrocederFaixa = () => {
     if (faixaAtual === 0) {
-      definirFaixaAtual(informacoesLivro.totalCapitulos - 1)
+      definirFaixaAtual(informacoesLivro.totalCapitulos - 1);
     } else {
-      definirFaixaAtual(faixaAtual - 1)
+      definirFaixaAtual(faixaAtual - 1);
     }
-  }
+  };
 
   const avancar15s = () => {
-    tagAudio.current.currentTime += 15
-  }
+    tagAudio.current.currentTime += 15;
+  };
 
   const retroceder15s = () => {
-    tagAudio.current.currentTime -= 15
-  }
-  const avancaraPara = (evento) => {
-    const largura = barraProgresso.current.clientWidth
-    const novoTempo = (evento.nativeEvent.offsetX / largura) * tempoTotalFaixa
-    tagAudio.current.currentTime = novoTempo
-  }
+    tagAudio.current.currentTime -= 15;
+  };
+
+  const avancarPara = (evento) => {
+    const largura = barraProgresso.current.clientWidth;
+    const novoTempo = (evento.nativeEvent.offsetX / largura) * tempoTotalFaixa;
+    tagAudio.current.currentTime = novoTempo;
+  };
 
   return (
     <>
@@ -86,23 +87,19 @@ function App() {
         imagemCapa={informacoesLivro.capa}
         textoAlternativo={informacoesLivro.textoAlternativo}
       />
-
       <SeletorCapitulos capituloAtual={faixaAtual + 1} />
-
       <GerenciadorFaixa
         faixa={informacoesLivro.capitulos[faixaAtual]}
         referencia={tagAudio}
         definirTempoTotalFaixa={definirTempoTotalFaixa}
         definirTempoAtualFaixa={definirTempoAtualFaixa}
       />
-
       <ContainerProgresso
         tempoTotalFaixa={tempoTotalFaixa}
         tempoAtualFaixa={tempoAtualFaixa}
         referencia={barraProgresso}
         avancarPara={avancarPara}
       />
-
       <BotoesControle
         taTocando={taTocando}
         tocarOuPausarFaixa={tocarOuPausarFaixa}
@@ -112,7 +109,7 @@ function App() {
         retroceder15s={retroceder15s}
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

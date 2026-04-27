@@ -8,7 +8,7 @@ const formatarTempo = (tempoEmSegundos) => {
 
 
   return (
-    <section className="container-progresso">
+    <section className="container-progresso" onClick={avancarPara}>
       <div className="progresso-total" ref={referencia} onClick={avancarPara}>
         <div className="progresso-atual" style={{
           width: `${(tempoAtualFaixa * 100) / tempoTotalFaixa}%`
